@@ -1,0 +1,205 @@
+:root {
+  --verde: #16805a;
+  --amarillo: #c98a00;
+  --rojo: #c62828;
+  --fondo: #f6f7f9;
+  --superficie: #ffffff;
+  --texto: #1c1f23;
+  --texto-suave: #5f6670;
+  --borde: #e2e5ea;
+  --radio: 12px;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--texto);
+  background: var(--fondo);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #111315;
+    --superficie: #1c1f23;
+    --texto: #eef0f2;
+    --texto-suave: #9aa1aa;
+    --borde: #2c3036;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { margin: 0; min-height: 100%; }
+
+body {
+  /* Respeta notch y barra inferior del iPhone */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS hace zoom en inputs con fuente < 16px */
+input, select, textarea, button { font: inherit; font-size: 16px; }
+
+.app { max-width: 640px; margin: 0 auto; }
+
+/* ---------- Encabezado ---------- */
+.encabezado { padding: 12px 16px 8px; }
+.encabezado h1 { margin: 4px 0; font-size: 28px; }
+.btn-volver {
+  background: none; border: none; padding: 4px 0; color: var(--verde);
+  font-size: 17px; cursor: pointer;
+}
+.titulo-editable {
+  display: block; width: 100%; margin-top: 4px; padding: 4px 0;
+  border: none; border-bottom: 1px dashed transparent; background: transparent;
+  color: var(--texto); font-size: 26px !important; font-weight: 700;
+}
+.titulo-editable:focus { outline: none; border-bottom-color: var(--borde); }
+
+/* ---------- Contenido ---------- */
+.contenido { padding: 8px 16px 24px; }
+.contenido.con-barra-inferior { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+.vacio { color: var(--texto-suave); text-align: center; margin: 32px 0; }
+.nota { color: var(--texto-suave); font-size: 14px; margin: 4px 0 8px; }
+
+/* ---------- Formularios ---------- */
+input[type='text'] {
+  width: 100%; min-width: 0; padding: 12px; border-radius: 10px;
+  border: 1px solid var(--borde); background: var(--superficie); color: var(--texto);
+}
+input[type='text']:focus { outline: 2px solid var(--verde); outline-offset: -1px; }
+.fila-form { display: flex; gap: 8px; margin-bottom: 16px; }
+.input-cantidad { width: 64px !important; flex: none; text-align: center; }
+.campo { display: block; margin-bottom: 16px; }
+.campo > span { display: block; font-size: 14px; color: var(--texto-suave); margin-bottom: 6px; }
+.input-moneda { position: relative; }
+.input-moneda > span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--texto-suave); }
+.input-moneda input { padding-left: 28px; }
+
+/* ---------- Botones ---------- */
+.btn {
+  padding: 12px 16px; border-radius: 10px; border: 1px solid var(--borde);
+  background: var(--superficie); color: var(--texto); font-weight: 600; cursor: pointer;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: 0.45; cursor: default; }
+.btn-primario { background: var(--verde); border-color: var(--verde); color: #fff; }
+.btn-peligro { color: var(--rojo); background: transparent; border-color: transparent; }
+.btn-bloque { display: block; width: 100%; margin-top: 16px; }
+.btn-icono {
+  width: 36px; height: 36px; flex: none; border: none; background: none;
+  color: var(--texto-suave); font-size: 22px; cursor: pointer;
+}
+
+/* ---------- Tarjetas de listas ---------- */
+.tarjetas, .items { list-style: none; padding: 0; margin: 0; }
+.tarjeta {
+  display: flex; flex-direction: column; gap: 4px; width: 100%; text-align: left;
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio);
+  padding: 14px 16px; margin-bottom: 8px; color: var(--texto); cursor: pointer;
+}
+.tarjeta-titulo { font-size: 17px; font-weight: 600; }
+.tarjeta-detalle { font-size: 14px; color: var(--texto-suave); }
+
+/* ---------- Ítems ---------- */
+.item {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio);
+  padding: 8px 8px 8px 14px; margin-bottom: 8px;
+}
+.item-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.item-nombre { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item-detalle { font-size: 14px; color: var(--texto-suave); }
+.stepper { display: flex; align-items: center; gap: 4px; flex: none; }
+.stepper button {
+  width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--borde);
+  background: var(--fondo); color: var(--texto); font-size: 18px; cursor: pointer;
+}
+.stepper button:disabled { opacity: 0.35; }
+.stepper span { min-width: 28px; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* ---------- Resumen ---------- */
+.resumen {
+  margin-top: 16px; padding: 12px 16px; border-radius: var(--radio);
+  background: var(--superficie); border: 1px solid var(--borde);
+}
+.resumen-fila { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; }
+.resumen-fila strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.nivel-ok, .nivel-sin-presupuesto { color: var(--texto); }
+.nivel-alerta { color: var(--amarillo); }
+.nivel-excedido { color: var(--rojo); }
+
+/* ---------- Barra inferior fija ---------- */
+.barra-inferior {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: 0 16px calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, var(--fondo) 70%, transparent);
+}
+.barra-inferior .btn-bloque { max-width: 608px; margin: 0 auto; }
+
+/* ---------- Modo compra ---------- */
+.barra-totales {
+  position: sticky; top: 0; z-index: 5;
+  padding: calc(8px + env(safe-area-inset-top)) 16px 12px;
+  margin-top: calc(-1 * env(safe-area-inset-top));
+  background: var(--superficie); border-bottom: 1px solid var(--borde);
+}
+.barra-totales-fila { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 2px 0; }
+.barra-totales-fila.nota { margin: 4px 0 0; }
+.etiqueta-total { color: var(--texto-suave); }
+.total-grande { font-size: 32px; font-variant-numeric: tabular-nums; }
+.barra-progreso { height: 8px; border-radius: 4px; background: var(--borde); overflow: hidden; margin: 6px 0 4px; }
+.barra-progreso-relleno { height: 100%; transition: width 0.25s ease; }
+.relleno-ok { background: var(--verde); }
+.relleno-alerta { background: var(--amarillo); }
+.relleno-excedido { background: var(--rojo); }
+.nivel-ok { color: var(--verde); }
+
+.seccion {
+  display: flex; align-items: center; gap: 8px; margin: 16px 0 8px;
+  font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--texto-suave);
+}
+.seccion span { background: var(--borde); border-radius: 10px; padding: 0 8px; font-size: 13px; }
+
+.item-tocable {
+  width: 100%; text-align: left; color: var(--texto); cursor: pointer; min-height: 56px;
+  padding: 8px 14px;
+}
+.item-en-carrito { opacity: 0.85; }
+.item-subtotal { flex: none; font-variant-numeric: tabular-nums; }
+.casilla {
+  flex: none; width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--borde); display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; color: #fff;
+}
+.casilla.marcada { background: var(--verde); border-color: var(--verde); }
+.etiqueta {
+  margin-left: 6px; padding: 1px 6px; border-radius: 6px; font-size: 11px; font-weight: 600;
+  background: #fff3cd; color: #7a5a00; vertical-align: middle;
+}
+
+/* ---------- Hoja (ventana para cargar precio) ---------- */
+.hoja-fondo {
+  position: fixed; inset: 0; z-index: 20; background: rgba(0, 0, 0, 0.4);
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: calc(24px + env(safe-area-inset-top)) 12px 12px;
+}
+/* Se ubica arriba para que el teclado del iPhone no la tape */
+.hoja {
+  width: 100%; max-width: 480px; background: var(--superficie); border-radius: 16px;
+  padding: 12px 16px 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.hoja-encabezado { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.hoja-encabezado h2 { margin: 0; font-size: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hoja .btn-bloque { margin-top: 10px; }
+.hoja-subtotal strong { font-size: 22px; }
+.stepper-grande button { width: 48px; height: 48px; font-size: 22px; }
+.stepper-grande input { width: 80px !important; text-align: center; }
+.error { color: var(--rojo); margin: 8px 0 0; font-size: 14px; }
+
+/* ---------- Etapa 4: historial y cierre ---------- */
+.barra-inferior-botones { display: flex; gap: 8px; max-width: 608px; margin: 0 auto; }
+.barra-inferior-botones .btn { flex: 1; padding: 14px 16px; }
+.barra-inferior-botones .btn:first-child { flex: 0 0 auto; }
+.tarjeta-fila { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.tarjeta-historial strong { font-variant-numeric: tabular-nums; }
+.item-no-comprado { opacity: 0.6; }
+.encabezado .nota { margin: 0; }
